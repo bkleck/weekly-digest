@@ -1,5 +1,5 @@
 # weekly-digest
-Text classification, summarization, NER and semantic similarity with transformer models. 
+*Text classification, summarization, NER and semantic similarity with transformer models*
 <br/>  
 <img src='https://user-images.githubusercontent.com/77097236/122026118-8d3d7580-cdfc-11eb-9613-c7fc3fe20f81.png' width="500" height="300">
 <br/>
@@ -22,17 +22,27 @@ There are also many instances of articles only mentioning the company in a small
 <br/>
   
 ### 2) Text Classification of Signals
+
+#### Training
 For this section, we will be building a neural network layer on top of BERT's architecture. We will be downloading the **_BERT-based uncased 12 layer_** from [Tensorflow Hub](https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/2). The reason for doing so is so that we can **_build Keras layers on top of BERT_** to classify it into our required outputs. 
 
-We will slowly drop the number of nodes through 3 **_Dense layers_** to give a final output of 1 or 0 for the signal, supported by **_Dropout layers_** to drop training data to prevent overfitting. The model architecture is shown in the `news_revenue.ipynb` notebook with the following codes:  
+We will slowly drop the number of nodes through **_Dense layers_** to give a final output of 1 or 0 for the signal, supported by **_Dropout layers_** to drop training data to prevent overfitting. The model architecture is shown in the `news_revenue.ipynb` notebook with the following codes:  
 
 `model = build_model(bert_layer, max_len=max_len)`  
 `model.summary()`
 
-Training is done with **_patience = 5_**, hence early-stopping will be activated if the validation categorical accuracy does not improve after 5 epochs. This was done for all 7 signals, with the results being shown below:
+Training is done with **_patience = 5_**, hence **_early-stopping_** will be activated if the validation categorical accuracy does not improve after 5 epochs. This was done for all 7 signals, with the results being shown below:
 
 Signals | Revenue | Product | Market | Partnership | Management | Clinical | Fundraising |
 :------ | :-----: | :-----: | :----: | :--------: | :-------: | :------: | :---------: |
 F1 score | 0.99   | 0.935   | 0.796  | 0.958       | 0.811       | 0.97    | 0.90        |
 macro avg | 0.99   | 0.787   | 0.799  | 0.954       | 0.800       | 0.83    | 0.90        |
 weighted avg | 0.99   | 0.929   | 0.795  | 0.958    | 0.806       | 0.97    | 0.90        |
+
+The models were trained on a **_labelled dataset of 3000 rows_** for each signal. Labelling was standardized across the team, with reference to the `Signal Classifier Coding Frame` file.
+<br/>
+<br/>
+#### Inference
+With the trained models saved, we will run inference using our models through the `run_models.py` file. However, we decided to keep the original logit score instead of encoding it into 1/0 in the notebook. Afterwards, I performed a **_min-max normalization_** for each of the 7 signals, and kept only the largest score. This is for the purpose of **_cross-comparison across different models_**. This change was made to **_prevent repitition of sentences across summaries_**, causing inconvenience for the end users.
+
+A for loop was used to run the 7 models. Runtime was **_15mins for 1 week of news articles_**, on GeForce RTX 2070, 8GB RAM.
