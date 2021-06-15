@@ -1,5 +1,7 @@
 # weekly-digest
-Text classification, summarization, NER and semantic similarity with transformer models.  
+Text classification, summarization, NER and semantic similarity with transformer models. 
+<br/>  
+<img src='https://user-images.githubusercontent.com/77097236/122026118-8d3d7580-cdfc-11eb-9613-c7fc3fe20f81.png' width="500" height="300">
 <br/>
 
 ## Introduction
@@ -12,5 +14,25 @@ After that, **_HuggingFace's NER pipeline_** is used to identify if the company 
 
 ## Workflow
 
-### 1) Cleaning scraped news
+### 1) Cleaning Scraped News
+Input data will come from **_Google and Baidu scrapers_**, with the Chinese articles translated to English. We will only be scraping for articles for our portfolio companies. Firstly, we will perform cleaning at the article level. Many of the articles scraped are actually **_market reports_**, with not much information conveyed about the company in mind, thus these reports will be removed with keryword search. 
 
+There are also many instances of articles only mentioning the company in a small section, hence we will remove articles with **_less than 2 mentions of the company name_**. Finally, articles will be **_converted to sentence level_** for input into our signal classifier models.
+<br/>
+<br/>
+  
+### 2) Text Classification of Signals
+For this section, we will be building a neural network layer on top of BERT's architecture. We will be downloading the **_BERT-based uncased 12 layer_** from [Tensorflow Hub](https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/2). The reason for doing so is so that we can **_build Keras layers on top of BERT_** to classify it into our required outputs. 
+
+We will slowly drop the number of nodes through 3 **_Dense layers_** to give a final output of 1 or 0 for the signal, supported by **_Dropout layers_** to drop training data to prevent overfitting. The model architecture is shown in the `news_revenue.ipynb` notebook with the following codes:  
+
+`model = build_model(bert_layer, max_len=max_len)`  
+`model.summary()`
+
+Training is done with **_patience = 5_**, hence early-stopping will be activated if the validation categorical accuracy does not improve after 5 epochs. This was done for all 7 signals, with the results being shown below:
+
+Signals | Revenue | Product | Market | Partnership | Management | Clinical | Fundraising |
+:------ | :-----: | :-----: | :----: | :--------: | :-------: | :------: | :---------: |
+F1 score | 0.99   | 0.935   | 0.796  | 0.958       | 0.811       | 0.97    | 0.90        |
+macro avg | 0.99   | 0.787   | 0.799  | 0.954       | 0.800       | 0.83    | 0.90        |
+weighted avg | 0.99   | 0.929   | 0.795  | 0.958    | 0.806       | 0.97    | 0.90        |
