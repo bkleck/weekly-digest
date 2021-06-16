@@ -63,4 +63,18 @@ Innoviz | ....   | [URL1, URL2]  | fundraising  |
 
 <br/>
 <br/>
-### 4) 
+
+### 4) Summarization
+With the large chunks of sentences for each signal after aggregation, I will make use of summarization to convert it to a **_readable format_** for the user, while **_retaining key points_**.
+
+We will be using the T5 model ([Text-To-Text Transfer Transformer](https://huggingface.co/transformers/model_doc/t5.html#tft5forconditionalgeneration)). This text-to-text framework suggests using the same model for all NLP tasks, where inputs are modelled such that the **_model will recognise the task_**, and the output is a **_"text" version_** of the outcome. Hence, for our task, we will have to add the string **_'summarize: '_** infront of each block of text to let the model know the task we want to perform.
+![image](https://user-images.githubusercontent.com/77097236/122148216-b73e7880-ce8c-11eb-884f-9f752964a7d7.png)
+
+Another reason why we are using the T5 is because it is an **_abstractive summarizer_**. Hence, it will **_rewrite sentences to make it more coherent_** for the user. This differs from extractive summarizers, where they just pick up sentences directly from text.
+
+The predictions of the model can be created using the `model.generate()` function. With the vast amount of arguments that can be passed in, I referred to this [guide](https://huggingface.co/blog/how-to-generate) for the tuning of the hyperparameters. I made use of **_min_length = 100 and max_length = 300_** for the most informative and concise summaries. **_Beam search_** was used to reduce the risk of missing hidden high probability word sequences. **_Repetition and length penalty_** was used to prevent the repeat of sentences, which often happens for short texts trying to reach the minimum length.
+<br/>
+<br/>
+
+### 5) Named Entity Recognition (NER)
+
