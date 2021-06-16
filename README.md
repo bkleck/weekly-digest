@@ -3,6 +3,15 @@
 <br/>  
 <img src='https://user-images.githubusercontent.com/77097236/122026118-8d3d7580-cdfc-11eb-9613-c7fc3fe20f81.png' width="500" height="300">
 <br/>
+## Table of Contents
+* [Introduction](#introduction)
+* [Workflow](#workflow)
+  * [Cleaning Scraped News](#1-cleaning-scraped-news)
+  * [BERT Signal Classification](#2-text-classification-of-signals)
+  * [Data Aggregation](#3-data-aggregation)
+  * [T5 Summarization](#4-summarization)
+  * [NER](#5-named-entity-recognition-ner)
+  * [Semantic Similarity](#6-semantic-similarity)
 
 ## Introduction
 With the vast number of news articles related to portfolio companies each week, it is **_time-consuming for end users_** to go through each of these articles one by one. Thus, this Weekly Digest aims to accelerate this process. The data input will come from scrapers deployed on Google and Baidu APIs.  
@@ -15,7 +24,7 @@ After that, **_HuggingFace's NER pipeline_** is used to identify if the company 
 ## Workflow
 
 ### 1) Cleaning Scraped News
-Input data will come from **_Google and Baidu scrapers_**, with the Chinese articles translated to English. We will only be scraping for articles for our portfolio companies. Firstly, we will perform cleaning at the article level. Many of the articles scraped are actually **_market reports_**, with not much information conveyed about the company in mind, thus these reports will be removed with keryword search. 
+Input data will come from **_Google and Baidu scrapers_**, with the Chinese articles translated to English. We will only be scraping for articles for our portfolio companies. Firstly, we will perform cleaning at the article level. Many of the articles scraped are actually **_market reports_**, with not much information conveyed about the company in mind, thus these reports will be removed with keyword search. 
 
 There are also many instances of articles only mentioning the company in a small section, hence we will remove articles with **_less than 2 mentions of the company name_**. Finally, articles will be **_converted to sentence level_** for input into our signal classifier models.
 <br/>
