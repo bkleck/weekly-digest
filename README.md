@@ -106,6 +106,17 @@ The ipynb notebooks help to illustrate the processes I went through, only use fo
 The python files are used to run the entire process on input dataset of news articles.
 - Files should be run in the following order: `clean_scraped~news.py`, `run_models.py`, `prep_summary.py`, `summary_transformer.py`.
 <br/>
+
+## Setup
+To accelerate the run-time, please ensure CUDA has been activated to support deep-learning processes
+- For `run_models.py`, ensure CUDA is installed to activate GPU on Tensorflow by referring [here](https://www.tensorflow.org/install/gpu).
+  - Install CUDA toolkit version 11.0 [here](https://developer.nvidia.com/cuda-11.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal).
+  - Rename cusolver64_10.dll to cusolver64_11.dll in bin folder.
+  - Install cuDNN [here](https://developer.nvidia.com/user).
+  - Copy the file cudnn64_8.dll and put into the CUDA bin folder.
+- For `summary_transformer.py`, ensure CUDA is installed to activate GPU on Pytorch.
+  - Download CUDA 10.1 [here](https://developer.nvidia.com/cuda-10.1-download-archive-base) as Pytorch does not support version 11 and above.
+  - Follow the steps [here](https://varhowto.com/install-pytorch-cuda-10-1/).
 <br/>
 
 ## How to Use
