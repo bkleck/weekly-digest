@@ -60,7 +60,6 @@ Company | Sentences | URL | Signal |
 Grab | ....   | [URL1, URL2]   | revenue  | 
 Grab | ....   | [URL1]   | partnership  | 
 Innoviz | ....   | [URL1, URL2]  | fundraising  | 
-
 <br/>
 <br/>
 
@@ -77,6 +76,13 @@ The predictions of the model can be created using the `model.generate()` functio
 <br/>
 
 ### 5) Named Entity Recognition (NER)
-With the scraping done from an API, it was hard for us to tweak the parameters for control of the output. Hence, there was a lot of **_noise in our dataset_**(e.g. search for Bites company, get spider bites article, search for Aruna company, get Aruna person). Hence, I made use of NER to **_remove such irrelevant articles_**.
+With the scraping done from an API, it was hard for us to tweak the parameters for control of the output. Hence, there was a lot of **_noise in our dataset_** (*e.g. search for Bites company, get spider bites article, search for Aruna company, get Aruna person*). Hence, I made use of NER to **_remove such irrelevant articles_**.
 
-Trying out both NER capabilities on HuggingFace and SpaCy, I have concluded that [HuggingFace pipeline](https://huggingface.co/transformers/usage.html) outperformed the latter, hence we will be using it instead. After NER labelling is done, we will keep only those summaries with the company name labelled as 'I-ORG' entities. 
+Trying out both NER capabilities on HuggingFace and SpaCy, I have concluded that [HuggingFace pipeline](https://huggingface.co/transformers/usage.html) outperformed the latter, hence we will be using it instead. After NER labelling is done, we will keep only those summaries with the company name labelled as **_'I-ORG' entities_**. 
+<br/>
+<br/>
+
+### 6) Semantic Similarity
+Another problem that we face is that some of these **_summaries end up pretty similar_** to each other, due to the fact that they came from the same sources. Thus, we will make use of the **_SentenceTransformer with large roBERTa_** from [HuggingFace](https://huggingface.co/sentence-transformers/stsb-roberta-large) to get **_sentence embeddings_**. 
+
+With these embeddings, we will then calculate the **_cosine score between pairs of sentences_** for each company. Hence, we will be dropping duplicate summaries with more than **_70% threshold_** similarity, so that end users do not have to go through the frustration of reading repititions.  
