@@ -46,3 +46,21 @@ The models were trained on a **_labelled dataset of 3000 rows_** for each signal
 With the trained models saved, we will run inference using our models through the `run_models.py` file. However, we decided to keep the original logit score instead of encoding it into 1/0 in the notebook. Afterwards, I performed a **_min-max normalization_** for each of the 7 signals, and kept only the largest score. This is for the purpose of **_cross-comparison across different models_**. This change was made to **_prevent repitition of sentences across summaries_**, causing inconvenience for the end users.
 
 A for loop was used to run the 7 models. Runtime was **_15mins for 1 week of news articles_**, on GeForce RTX 2070, 8GB RAM.
+<br/>
+<br/>
+
+### 3) Data Aggregation
+Firstly, I created short-form names for all portfolio companies in the `vpc_master_070621.xlsx` file for keyword search within the sentences. Afterwards, I will **_keep only the sentences with matches with the name_**, together with **_1 sentence before and after_** if it came from the same search query. The purpose for keeping sentences around the main sentence was to **_give the user context_** about the situation, else it will be hard for he/she to evaluate the piece of information. 
+
+For each signal, we will keep all the rows with **_signal = 1, together with 1 sentence before and after_**, only if it came from the same search query. Then, a **_groupby will be done at the company and signal level_**, with the sentences joined together as a string and the URLs to the articles joined in a list.
+
+An example of how this output will look like:
+Company | Sentences | URL | Signal | 
+:------ | :-----: | :-----: | :----: | 
+Grab | ....   | [URL1, URL2]   | revenue  | 
+Grab | ....   | [URL1]   | partnership  | 
+Innoviz | ....   | [URL1, URL2]  | fundraising  | 
+
+<br/>
+<br/>
+### 4) 
