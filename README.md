@@ -70,7 +70,6 @@ Grab | ....   | [URL1, URL2]   | revenue  |
 Grab | ....   | [URL1]   | partnership  | 
 Innoviz | ....   | [URL1, URL2]  | fundraising  | 
 <br/>
-<br/>
 
 ### 4) Summarization
 With the large chunks of sentences for each signal after aggregation, I will make use of summarization to convert it to a **_readable format_** for the user, while **_retaining key points_**.
@@ -95,3 +94,18 @@ Trying out both NER capabilities on HuggingFace and SpaCy, I have concluded that
 Another problem that we face is that some of these **_summaries end up pretty similar_** to each other, due to the fact that they came from the same sources. Thus, we will make use of the **_SentenceTransformer with large roBERTa_** from [HuggingFace](https://huggingface.co/sentence-transformers/stsb-roberta-large) to get **_sentence embeddings_**. 
 
 With these embeddings, we will then calculate the **_cosine score between pairs of sentences_** for each company. Hence, we will be dropping duplicate summaries with more than **_70% threshold_** similarity, so that end users do not have to go through the frustration of reading repititions.  
+<br/>
+<br/>
+
+## File Descriptions
+The ipynb notebooks help to illustrate the processes I went through, only use for reference.
+- `news_revenue.ipynb` shows the **_training process_** for 2 of 7 signals.
+- `news_pipeline.ipynb` shows the **_inference step_** used to run predictions across all 7 signals.
+- `summary_transformer.ipynb` shows the rest of the steps from **_Summarization to Semantic Similarity_**.
+
+The python files are used to run the entire process on input dataset of news articles.
+- Files should be run in the following order: `clean_scraped~news.py`, `run_models.py`, `prep_summary.py`, `summary_transformer.py`.
+<br/>
+<br/>
+
+## How to Use
