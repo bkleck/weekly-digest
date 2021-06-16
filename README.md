@@ -15,6 +15,7 @@
 * [File Descriptions](#file-descriptions)
 * [Setup](#setup)
 * [How to Use](#how-to-use)
+* [Data Flow](#data-flow)
 
 ## Introduction
 With the vast number of news articles related to portfolio companies each week, it is **_time-consuming for end users_** to go through each of these articles one by one. Thus, this Weekly Digest aims to accelerate this process. The data input will come from scrapers deployed on Google and Baidu APIs.  
@@ -133,3 +134,8 @@ If you just want to use the models for inference on a new dataset, follow the st
 6. Run `run_models.py`. Runtime is ~15mins. Please ensure GPU is activated. Output files will be in **_data folder_**: **_150621_signal_google_predictions.csv and 150621_signal_baidu_predictions.csv_**.
 7. Run `prep_summary.py`. Output file will be in **_data/summary folder_**: **_150621_before_summary.csv_**.
 8. Run `summary_transformer.py`. Runtime is ~20mins. Please ensure GPU is activated. Output file will be in same folder: **_150621_after_summary.csv_**. 
+<br/>
+
+## Data Flow
+The image below shows the full flow of the data between python files:
+![image](https://user-images.githubusercontent.com/77097236/122182543-f389cd00-cebc-11eb-8edf-13ae8806c234.png)
