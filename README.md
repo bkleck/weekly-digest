@@ -77,4 +77,6 @@ The predictions of the model can be created using the `model.generate()` functio
 <br/>
 
 ### 5) Named Entity Recognition (NER)
+With the scraping done from an API, it was hard for us to tweak the parameters for control of the output. Hence, there was a lot of **_noise in our dataset_**(e.g. search for Bites company, get spider bites article, search for Aruna company, get Aruna person). Hence, I made use of NER to **_remove such irrelevant articles_**.
 
+Trying out both NER capabilities on HuggingFace and SpaCy, I have concluded that [HuggingFace pipeline](https://huggingface.co/transformers/usage.html) outperformed the latter, hence we will be using it instead. After NER labelling is done, we will keep only those summaries with the company name labelled as 'I-ORG' entities. 
