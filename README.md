@@ -108,15 +108,25 @@ The python files are used to run the entire process on input dataset of news art
 <br/>
 
 ## Setup
-To accelerate the run-time, please ensure CUDA has been activated to support deep-learning processes
-- For `run_models.py`, ensure CUDA is installed to activate GPU on Tensorflow by referring [here](https://www.tensorflow.org/install/gpu).
+To accelerate the run-time, please ensure CUDA has been activated to support deep-learning processes.
+- For `run_models.py`, ensure CUDA is installed to **_activate GPU on Tensorflow_** by referring [here](https://www.tensorflow.org/install/gpu).
   - Install CUDA toolkit version 11.0 [here](https://developer.nvidia.com/cuda-11.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal).
   - Rename cusolver64_10.dll to cusolver64_11.dll in bin folder.
   - Install cuDNN [here](https://developer.nvidia.com/user).
   - Copy the file cudnn64_8.dll and put into the CUDA bin folder.
-- For `summary_transformer.py`, ensure CUDA is installed to activate GPU on Pytorch.
+  
+- For `summary_transformer.py`, ensure CUDA is installed to **_activate GPU on Pytorch_**.
   - Download CUDA 10.1 [here](https://developer.nvidia.com/cuda-10.1-download-archive-base) as Pytorch does not support version 11 and above.
   - Follow the steps [here](https://varhowto.com/install-pytorch-cuda-10-1/).
 <br/>
 
 ## How to Use
+If you just want to use the models for inference on a new dataset, follow the steps here.
+1. Command prompt into the folder and create the virtual environment with `python -m venv venv/ ` (only do it one time).
+2. Activate the environment with `{directory}\venv\Scripts\activate`.
+3. If it is your first time, install libraries with `pip install -r requirements.txt`.
+4. Input the newly scraped data file into the **_data/scrape folder_** in the following format: **_150621_google.csv and 150621_baidu.csv_**.
+5. Run `clean_scraped~news.py`. Output file will be in the same folder with same date: **_150621_clean_google.csv and 150621_clean_baidu.csv_**.
+6. Run `run_models.py`. Please ensure GPU is activated. Output file will be in **_data folder_**: **_150621_signal_google_predictions.csv and 150621_signal_baidu_predictions.csv_**. Runtime is ~15mins.
+7. Run `prep_summary.py`. Output file will be in **_data/summary folder_**: **_150621_before_summary.csv_**.
+8. Run `summary_transformer.py`. Please ensure GPU is activated. Output file will be in same folder: **_150621_after_summary.csv_**. Runtime is ~20mins.
