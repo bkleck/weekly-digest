@@ -138,4 +138,4 @@ If you just want to use the models for inference on a new dataset, follow the st
 
 ## Data Flow
 The image below shows the full flow of the data between python files:
-![image](https://user-images.githubusercontent.com/77097236/122182543-f389cd00-cebc-11eb-8edf-13ae8806c234.png)
+<img src='https://user-images.githubusercontent.com/77097236/122183428-d0abe880-cebd-11eb-8a34-f9d408554a5d.jpg' width="800" height="600">
