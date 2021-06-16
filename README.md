@@ -104,7 +104,7 @@ The ipynb notebooks help to illustrate the processes I went through, only use fo
 - `summary_transformer.ipynb` shows the rest of the steps from **_Summarization to Semantic Similarity_**.
 
 The python files are used to run the entire process on input dataset of news articles.
-- Files should be run in the following order: `clean_scraped~news.py`, `run_models.py`, `prep_summary.py`, `summary_transformer.py`.
+- Files should be run in the following order: `clean_scraped_news.py`, `run_models.py`, `prep_summary.py`, `summary_transformer.py`.
 <br/>
 
 ## Setup
@@ -125,8 +125,8 @@ If you just want to use the models for inference on a new dataset, follow the st
 1. Command prompt into the folder and create the virtual environment with `python -m venv venv/ ` (only do it one time).
 2. Activate the environment with `{directory}\venv\Scripts\activate`.
 3. If it is your first time, install libraries with `pip install -r requirements.txt`.
-4. Input the newly scraped data file into the **_data/scrape folder_** in the following format: **_150621_google.csv and 150621_baidu.csv_**.
-5. Run `clean_scraped~news.py`. Output file will be in the same folder with same date: **_150621_clean_google.csv and 150621_clean_baidu.csv_**.
-6. Run `run_models.py`. Please ensure GPU is activated. Output file will be in **_data folder_**: **_150621_signal_google_predictions.csv and 150621_signal_baidu_predictions.csv_**. Runtime is ~15mins.
+4. Input the newly scraped data files into the **_data/scrape folder_** in the following format: **_150621_google.csv and 150621_baidu.csv_**.
+5. Run `clean_scraped_news.py`. Output files will be in the same folder with same date: **_150621_clean_google.csv and 150621_clean_baidu.csv_**.
+6. Run `run_models.py`. Runtime is ~15mins. Please ensure GPU is activated. Output files will be in **_data folder_**: **_150621_signal_google_predictions.csv and 150621_signal_baidu_predictions.csv_**.
 7. Run `prep_summary.py`. Output file will be in **_data/summary folder_**: **_150621_before_summary.csv_**.
-8. Run `summary_transformer.py`. Please ensure GPU is activated. Output file will be in same folder: **_150621_after_summary.csv_**. Runtime is ~20mins.
+8. Run `summary_transformer.py`. Runtime is ~20mins. Please ensure GPU is activated. Output file will be in same folder: **_150621_after_summary.csv_**. 
