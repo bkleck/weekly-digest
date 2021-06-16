@@ -12,6 +12,9 @@
   * [T5 Summarization](#4-summarization)
   * [NER](#5-named-entity-recognition-ner)
   * [Semantic Similarity](#6-semantic-similarity)
+* [File Descriptions](#file-descriptions)
+* [Setup](#setup)
+* [How to Use](#how-to-use)
 
 ## Introduction
 With the vast number of news articles related to portfolio companies each week, it is **_time-consuming for end users_** to go through each of these articles one by one. Thus, this Weekly Digest aims to accelerate this process. The data input will come from scrapers deployed on Google and Baidu APIs.  
