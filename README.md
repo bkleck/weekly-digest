@@ -141,7 +141,7 @@ If you just want to use the models for inference on a new dataset, follow the st
 *Improvements made here have been updated into the most recent python files. Old files are in the archive folder.*
 - [x] **Few-shot learning**  
 With the model architecture in place, we made use of few-shot learning to improve our output. Using 10 manually created summaries, I ran a small training loop on 10 epochs to **_finetune the model weights_** to suit our use case.  
-This **_improved the coherence_** of the summaries and helped to extract the correct information, as well as **_improve grammar, punctuation and readability_**. This is shown in the `summary_tuning.ipynb` notebook. 
+This **_improved the coherence_** of the summaries and helped to extract the correct information, as well as **_improve grammar, punctuation and readability_**. Hence, we will **_load weights from the summary_weights folder_** instead of from HuggingFace. This is shown in the `summary_tuning.ipynb` notebook. 
 
 - [ ] **PEGASUS model**  
 I also tried the PEGASUS model trained for [financial summarization](https://huggingface.co/human-centered-summarization/financial-summarization-pegasus). However, given the **_small model size and limited training data_**, it did not perform very well. Furthermore, it was trained to **_generate 1 sentence outputs_**, which led to alot of noise when generating longer summaries, hence it did not suit our use case.
