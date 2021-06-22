@@ -15,6 +15,7 @@
 * [File Descriptions](#file-descriptions)
 * [Setup](#setup)
 * [How to Use](#how-to-use)
+* [Improvements](#improvements)
 * [Data Flow](#data-flow)
 
 ## Introduction
