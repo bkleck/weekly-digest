@@ -136,6 +136,18 @@ If you just want to use the models for inference on a new dataset, follow the st
 8. Run `summary_transformer.py`. Runtime is ~20mins. Please ensure GPU is activated. Output file will be in same folder: **_150621_after_summary.csv_**. 
 <br/>
 
+## Improvements
+- [x] **Few-shot learning**  
+With the model architecture in place, we made use of few-shot learning to improve our output. Using 10 manually created summaries, I ran a small training loop on 10 epochs to **_finetune the model weights_** to suit our use case.  
+This **_improved the coherence_** of the summaries and helped to extract the correct information, as well as **_improve grammar, punctuation and readability_**. This is shown in the `summary_tuning.ipynb` notebook. 
+
+- [ ] **PEGASUS model**  
+I also tried the PEGASUS model trained for [financial summarization](https://huggingface.co/human-centered-summarization/financial-summarization-pegasus). However, given the **_small model size and limited training data_**, it did not perform very well. Furthermore, it was trained to **_generate 1 sentence outputs_**, which led to alot of noise when generating longer summaries, hence it did not suit our use case.
+
+- [x] **Logic change**  
+I also tried the PEGASUS model trained for [financial summarization](https://huggingface.co/human-centered-summarization/financial-summarization-pegasus). However, given the **_small model size and limited training data_**, it did not perform very well. Furthermore, it was trained to **_generate 1 sentence outputs_**, which led to alot of noise when generating longer summaries, hence it did not suit our use case.
+<br/>
+
 ## Data Flow
 The image below shows the full flow of the data between python files:
 <img src='https://user-images.githubusercontent.com/77097236/122183428-d0abe880-cebd-11eb-8a34-f9d408554a5d.jpg' width="800" height="600">
