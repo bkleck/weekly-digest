@@ -126,7 +126,7 @@ To accelerate the run-time, please ensure CUDA has been activated to support dee
 
 ## How to Use
 If you just want to use the models for inference on a new dataset, follow the steps here.
-1. Command prompt into the folder and create the virtual environment with `python -m venv venv/ ` (only do it one time).
+1. Command prompt into the folder and create the virtual environment with `python -m venv venv/` (only do it one time).
 2. Activate the environment with `{directory}\venv\Scripts\activate`.
 3. If it is your first time, install libraries with `pip install -r requirements.txt`.
 4. Input the newly scraped data files into the **_data/scrape folder_** in the following format: **_150621_google.csv and 150621_baidu.csv_**.
@@ -137,6 +137,7 @@ If you just want to use the models for inference on a new dataset, follow the st
 <br/>
 
 ## Improvements
+*Improvements made here have been updated into the most recent python files. Old files are in the archive folder.*
 - [x] **Few-shot learning**  
 With the model architecture in place, we made use of few-shot learning to improve our output. Using 10 manually created summaries, I ran a small training loop on 10 epochs to **_finetune the model weights_** to suit our use case.  
 This **_improved the coherence_** of the summaries and helped to extract the correct information, as well as **_improve grammar, punctuation and readability_**. This is shown in the `summary_tuning.ipynb` notebook. 
@@ -145,7 +146,11 @@ This **_improved the coherence_** of the summaries and helped to extract the cor
 I also tried the PEGASUS model trained for [financial summarization](https://huggingface.co/human-centered-summarization/financial-summarization-pegasus). However, given the **_small model size and limited training data_**, it did not perform very well. Furthermore, it was trained to **_generate 1 sentence outputs_**, which led to alot of noise when generating longer summaries, hence it did not suit our use case.
 
 - [x] **Logic change**  
-I also tried the PEGASUS model trained for [financial summarization](https://huggingface.co/human-centered-summarization/financial-summarization-pegasus). However, given the **_small model size and limited training data_**, it did not perform very well. Furthermore, it was trained to **_generate 1 sentence outputs_**, which led to alot of noise when generating longer summaries, hence it did not suit our use case.
+Looking at the output, we realise that our original intention to group by signals so that users can see all relevant informationg pertaining to one signal, has caused a problem. The **_summaries contain information from various contexts_** originating from numerous sources of news, which may lead to some inaccuracy in presentation. Hence, we have decided to change the logic and do a **_clustering by indexes_** instead.  
+<img src='https://user-images.githubusercontent.com/77097236/122890063-ef0a5c00-d375-11eb-9b47-2bdfdcfbffa5.png' width="300" height="200">
+
+> Hence, this new logic serves to **_group up continuous columns of text_** if they belong to the same article, **_retaining the context_** of the situation. This will introduce greater variance in lengths of text, hence **_2 separate summarizer arguments_** will be used to handle short and long texts. **_Min_length and length_penalty arguments will be removed_** to reduce instances where the ending of summaries are cut off.
+<br/>
 <br/>
 
 ## Data Flow
