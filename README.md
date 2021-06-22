@@ -148,7 +148,9 @@ I also tried the PEGASUS model trained for [financial summarization](https://hug
 
 - [x] **Logic change**  
 Looking at the output, we realise that our original intention to group by signals so that users can see all relevant informationg pertaining to one signal, has caused a problem. The **_summaries contain information from various contexts_** originating from numerous sources of news, which may lead to some inaccuracy in presentation. Hence, we have decided to change the logic and do a **_clustering by indexes_** instead.  
-<img src='https://user-images.githubusercontent.com/77097236/122890063-ef0a5c00-d375-11eb-9b47-2bdfdcfbffa5.png' width="300" height="200">
+<img src='https://user-images.githubusercontent.com/77097236/122890063-ef0a5c00-d375-11eb-9b47-2bdfdcfbffa5.png' width="300" height="200" align="left">
+
+<br/>
 
 > Hence, this new logic serves to **_group up continuous columns of text_** if they belong to the same article, **_retaining the context_** of the situation. This will introduce greater variance in lengths of text, hence **_2 separate summarizer arguments_** will be used to handle short and long texts. **_Min_length and length_penalty arguments will be removed_** to reduce instances where the ending of summaries are cut off.
 <br/>
